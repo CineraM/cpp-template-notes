@@ -35,44 +35,37 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
-
-ListNode* mergeKLists(vector<ListNode*>& lists)
+bool hasCycle(ListNode *head) 
 {
-    vector<int> nums;
+    unordered_map<ListNode*, int> found;
+
     ListNode* cur = new ListNode;
-    ListNode* head = new ListNode;
+    int cycle = -1;
+    int position = 0;
 
-    for(auto list : lists)
+    for(cur = head; cur!=nullptr; cur=cur->next)
     {
-        for(cur = list; cur != nullptr; cur = cur->next)
-            nums.push_back(cur->val);
+        auto itr = found.find(cur);
+        if(itr != found.end())
+        {
+            cycle = itr->second;
+            break;
+        }
+        else
+        {
+            found.insert(make_pair(itr->first, position));
+        }
+
+        position++;
     }
 
-    int size = nums.size();
-    if(size <= 0)
-        return head;
-
-    sort(nums.begin(), nums.end());
-    
-    head->val = nums[0];
-    cur = head;
-
-    for(int i = 1; i<size; i++)
-    {
-        ListNode* new_node = new ListNode;
-        new_node->val = nums[i];
-        cur->next = new_node;
-        cur = cur->next;
-    }
-
-    return head;
-    
+    return cycle;    
 }
 
 int main()
 {
     vector<int> a = {2,1,4,7,3,2,5};
-
+    
     return 1;
 }
 
@@ -205,6 +198,8 @@ a.pop_front();            // Removes a[0], shifts toward front
 pair<string, int> a("hello", 3);  // A 2-element struct
 a.first;                  // "hello"
 a.second;                 // 3
+map<int, int>::iterator itr = map_name.find(12);
+or use auto
 
 BINARY TREE MAP
 #include <map>            // Include map (std namespace)
