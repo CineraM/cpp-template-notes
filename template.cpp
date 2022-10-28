@@ -65,6 +65,22 @@ bool hasCycle(ListNode *head)
 int main()
 {
     vector<int> a = {2,1,4,7,3,2,5};
+    unordered_map<int,int> mp;
+    
+    for(int num : a)
+        mp[num] = 1;
+
+
+    for(auto it : mp)
+        cout << "first: " << it.first << " value: " << it.second << '\n';
+    cout << '\n';
+
+    for(auto &it : mp)  // pass ad adress to update values
+        it.second = 0;
+    
+    for(auto it : mp)
+        cout << "first: " << it.first << " value: " << it.second << '\n';
+    
     
     return 1;
 }
@@ -194,6 +210,9 @@ a.pop_front();            // Removes a[0], shifts toward front
 
 
   MAP - MAP - MAP - MAP - MAP - MAP - MAP - MAP - MAP
+
+for(auto &it : mp)  // pass ad adress to update values
+    it.second = 0;
 
 pair<string, int> a("hello", 3);  // A 2-element struct
 a.first;                  // "hello"
